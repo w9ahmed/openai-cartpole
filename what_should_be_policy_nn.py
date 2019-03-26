@@ -68,7 +68,7 @@ max_game_steps = 1000
 num_iterations = 750
 discount_rate = 0.9
 
-with tf.Session() as sess:
+""" with tf.Session() as sess:
     sess.run(init)
     for iteration in range(num_iterations):
         print('On iteration %d' % iteration)
@@ -105,7 +105,7 @@ with tf.Session() as sess:
         sess.run(training_op, feed_dict=feed_dict)
         print('Saving graph and session')
         meta_graph_def = tf.train.export_meta_graph(filename='models/my-policy-model.meta')
-        saver.save(sess, 'models/my-policy-model')
+        saver.save(sess, 'models/my-policy-model') """
 
 
 
@@ -116,7 +116,7 @@ with tf.Session() as sess:
     new_saver = tf.train.import_meta_graph('models/my-policy-model.meta')
     new_saver.restore(sess, 'models/my-policy-model')
 
-    for x in range(500):
+    for _ in range(500):
         env.render()
         action_val, gradients_val = sess.run([action, gradients], feed_dict={x: observations.reshape(1, num_inputs)})
         observations, reward, done, info = env.step(action_val[0][0])

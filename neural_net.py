@@ -35,9 +35,10 @@ with tf.Session() as sess:
         obs = env.reset()
 
         for step in range(step_limit):
+            env.render()
             action_val = action.eval(feed_dict={x: obs.reshape(1, num_inputs)})
             obs, reward, done, info = env.step(action_val[0][0])
-            print(obs, reward, done, info)
+            # print(obs, reward, done, info)
 
             if done:
                 avg_steps.append(step)
